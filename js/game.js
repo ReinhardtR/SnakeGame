@@ -82,7 +82,9 @@ function draw() {
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
     isAlive = false;
-    if (score > highScore) highScore = score;
+    if (score > highScore) {
+      score = highScore;
+    }
     textOnScreen = false;
   }
 }
