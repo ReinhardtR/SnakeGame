@@ -63,10 +63,24 @@ export default class Snake {
     });
   }
 
-  collision(position) {
-    return this.body.some((segment) => {
+  collision(position, { ignoreHead = false } = {}) {
+    return this.body.some((segment, index) => {
+      if (ignoreHead && index === 0) return false;
       return segment.x === position.x && segment.y === position.y;
     });
+  }
+
+  gridCollision() {
+    return (
+      this.body[0].x < 1 ||
+      this.body[0].x > 21 ||
+      this.body[0].y < 1 ||
+      this.body[0].y > 21
+    );
+  }
+
+  selfCollision() {
+    return this.collision(this.body[0], { ignoreHead: true });
   }
 
   addSegments() {

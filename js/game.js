@@ -23,7 +23,6 @@ function main(currentTime) {
   lastRenderTime = currentTime;
 
   if (!isAlive) {
-    console.log(isAlive);
     screenText("Press Any Key to Play");
     window.addEventListener("keydown", listener);
   } else {
@@ -36,7 +35,6 @@ function main(currentTime) {
 window.requestAnimationFrame(main);
 
 function screenText(text) {
-  console.log(text);
   const guiElement = document.createElement("div");
   guiElement.classList.add("screen-text");
   guiElement.append(text);
@@ -61,12 +59,7 @@ function draw() {
 }
 
 function checkDeath() {
-  if (
-    snake.body[0].x > 21 ||
-    snake.body[0].x < 1 ||
-    snake.body[0].y > 21 ||
-    snake.body[0].y < 1
-  ) {
+  if (snake.gridCollision() || snake.selfCollision()) {
     isAlive = false;
   }
 }
