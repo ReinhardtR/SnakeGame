@@ -10,19 +10,36 @@
 </head>
 
 <body>
-  <div id="interface">
-    <div class="score-wrap">
-      <div class="score-title">Score</div>
-      <span id="current-score"></span>
+  <div id="main-wrap">
+    <div id="game-wrap">
+      <div id="interface">
+        <div class="score-wrap">
+          <div class="score-title">Score</div>
+          <span id="current-score"></span>
+        </div>
+        <div class="score-wrap">
+          <div class="score-title">High Score</div>
+          <span id="high-score"></span>
+        </div>
+      </div>
+      <div id="game-board"></div>
     </div>
-    <div class="score-wrap">
-      <div class="score-title">High Score</div>
-      <span id="high-score"></span>
+    <div id="leaderboard">
+      Leaderboard
+      <hr class="leaderboard-divider"></hr>
+      <div class="leaderboard-item">Tekst</div>
+      <hr class="leaderboard-divider"></hr>
+      <div class="leaderboard-item">Tekst</div>
+      <hr class="leaderboard-divider"></hr>
+      <div class="leaderboard-item">Tekst</div>
     </div>
   </div>
-  <div id="game-board">
-    <div id="screen-text"></div>
-  </div>
+
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+  <!-- Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
 </body>
 
 </html>

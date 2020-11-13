@@ -1,5 +1,7 @@
 import Snake from "./snake.js";
 import Apple from "./apple.js";
+import { GUI } from "./interface.js";
+import { addUser } from "./leaderboard.js";
 
 var snake;
 var apple;
@@ -8,25 +10,39 @@ var isAlive = false;
 var score = 0;
 var highScore = 0;
 
-var startGame = function () {
-  score = 0;
-  isAlive = true;
-  snake = new Snake();
-  apple = new Apple();
+// Event Functions
+var startGame = function (e) {
+  if (
+    e.code === "KeyW" ||
+    e.code === "KeyS" ||
+    e.code === "KeyA" ||
+    e.code === "KeyD"
+  ) {
+    score = 0;
+    isAlive = true;
+    snake = new Snake();
+    apple = new Apple();
+  }
 };
 
+// Docs
 const gameBoard = document.getElementById("game-board");
+var textOnScreen = false;
+
+var speed = 10;
 var lastRenderTime = 0;
 function main(currentTime) {
   window.requestAnimationFrame(main);
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-  if (secondsSinceLastRender < 1 / 8) return;
+  if (secondsSinceLastRender < 1 / speed) return;
   lastRenderTime = currentTime;
 
-  GUI();
+  GUI(score, highScore, isAlive);
 
   if (!isAlive) {
-    screenText("Press Any Key to Play");
+    if (!textOnScreen) {
+      screenText("Press W, A, S or D to Start");
+    }
     window.addEventListener("keydown", startGame);
   } else {
     update();
@@ -37,20 +53,15 @@ function main(currentTime) {
 
 window.requestAnimationFrame(main);
 
-function GUI() {
-  document.getElementById("current-score").innerHTML = score;
-  document.getElementById("high-score").innerHTML = highScore;
-}
-
 function screenText(text) {
-  const guiElement = document.createElement("div");
+  var guiElement = document.createElement("div");
   guiElement.id = "screen-text";
   guiElement.innerHTML = text;
   gameBoard.append(guiElement);
+  textOnScreen = true;
 }
 
 function update() {
-  GUI();
   snake.update();
   if (snake.collision(apple.position)) {
     snake.newSegments += apple.increaseAmount;
@@ -71,8 +82,7 @@ function draw() {
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
     isAlive = false;
-    if (score > highScore) {
-      highScore = score;
-    }
+    if (score > highScore) highScore = score;
+    textOnScreen = false;
   }
 }

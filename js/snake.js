@@ -1,15 +1,17 @@
 export default class Snake {
   constructor() {
-    this.speed = 8;
     this.direction = { x: 1, y: 0 };
-    this.body = [{ x: 11, y: 10 }];
+    this.body = [
+      { x: 11, y: 10 },
+      { x: 12, y: 10 },
+    ];
     this.newSegments = 0;
     this.inputs = [];
   }
 
   getInputDirection() {
     if (this.inputs.length) {
-      this.inputs = this.inputs.slice(0,1)
+      this.inputs = this.inputs.slice(0, 1);
       this.direction = this.inputs.shift();
     }
 
@@ -46,11 +48,14 @@ export default class Snake {
   }
 
   draw(gameBoard) {
-    this.body.forEach((segment) => {
+    this.body.forEach((segment, index) => {
       const snakeElement = document.createElement("div");
       snakeElement.style.gridColumnStart = segment.x;
       snakeElement.style.gridRowStart = segment.y;
       snakeElement.classList.add("snake");
+      if (index === 0) {
+        snakeElement.classList.add("snake-head");
+      }
       gameBoard.appendChild(snakeElement);
     });
   }
@@ -65,9 +70,9 @@ export default class Snake {
   gridCollision() {
     return (
       this.body[0].x < 1 ||
-      this.body[0].x > 21 ||
+      this.body[0].x > 24 ||
       this.body[0].y < 1 ||
-      this.body[0].y > 21
+      this.body[0].y > 24
     );
   }
 
