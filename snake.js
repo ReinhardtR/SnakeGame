@@ -1,12 +1,12 @@
 export default class Snake {
   constructor() {
     this.speed = 8;
-    this.direction = { x: 0, y: 0 };
+    this.direction = { x: 1, y: 0 };
     this.body = [
       { x: 11, y: 11 },
-      { x: 12, y: 12 },
-      { x: 13, y: 13 },
-      { x: 14, y: 14 },
+      { x: 12, y: 11 },
+      { x: 13, y: 11 },
+      { x: 14, y: 11 },
     ];
     this.newSegments = 0;
   }

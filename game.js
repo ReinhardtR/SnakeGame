@@ -1,57 +1,51 @@
 import Snake from "./snake.js";
 import Apple from "./apple.js";
 
-var snake = new Snake();
-var apple = new Apple();
+var snake;
+var apple;
 
-const userInterface = document.getElementById("gui");
+const gui = document.getElementById("gui");
 const gameBoard = document.getElementById("game-board");
 
 var isAlive = false;
-var score = 0;
 
-if (isAlive) {
-  main();
-} else {
-  window.addEventListener("keydown", () => {
-    isAlive = true;
-    gameBoard.innerHTML = "";
-  });
-  GUI();
-}
+var listener = function () {
+  isAlive = true;
+  snake = new Snake();
+  apple = new Apple();
+};
 
 var lastRenderTime = 0;
 function main(currentTime) {
   window.requestAnimationFrame(main);
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-  if (secondsSinceLastRender < 1 / snake.speed) return;
+  if (secondsSinceLastRender < 1 / 5) return;
   lastRenderTime = currentTime;
 
-  if (isAlive) {
+  if (!isAlive) {
+    console.log(isAlive);
+    screenText("Press Any Key to Play");
+    window.addEventListener("keydown", listener);
+  } else {
     update();
     draw();
-  } else {
-    window.addEventListener("keydown", () => {
-      isAlive = true;
-      gameBoard.innerHTML = "";
-    });
-    GUI();
+    window.removeEventListener("keydown", listener);
   }
 }
 
 window.requestAnimationFrame(main);
 
-function GUI() {
+function screenText(text) {
+  console.log(text);
   const guiElement = document.createElement("div");
-  guiElement.classList.add("gui");
-  guiElement.append("Press Enter to Play");
+  guiElement.classList.add("screen-text");
+  guiElement.append(text);
   gameBoard.append(guiElement);
 }
 
 function update() {
   snake.update();
   if (snake.collision(apple.position)) {
-    score++;
     snake.newSegments += apple.increaseAmount;
     while (snake.collision(apple.position)) {
       apple.spawn();
@@ -67,7 +61,12 @@ function draw() {
 }
 
 function checkDeath() {
-  if (snake.body[0].x < 0 || snake.body[0].y < 0) {
+  if (
+    snake.body[0].x > 21 ||
+    snake.body[0].x < 1 ||
+    snake.body[0].y > 21 ||
+    snake.body[0].y < 1
+  ) {
     isAlive = false;
   }
 }
