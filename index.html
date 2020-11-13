@@ -16,10 +16,19 @@
       margin: 0;
     }
 
+    .gui {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+    }
+
     #game-board {
       background-color: rgb(10, 40, 60);
-      height: 100vmin;
-      width: 100vmin;
+      height: 95vmin;
+      width: 95vmin;
       display: grid;
       grid-template-rows: repeat(21, 1fr);
       grid-template-columns: repeat(21, 1fr);
@@ -40,8 +49,7 @@
 </head>
 
 <body>
-  <div id="game-board">
-  </div>
+  <div id="game-board"></div>
 </body>
 
 </html>
