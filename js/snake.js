@@ -2,42 +2,34 @@ export default class Snake {
   constructor() {
     this.speed = 8;
     this.direction = { x: 1, y: 0 };
-    this.body = [
-      { x: 11, y: 11 },
-      { x: 12, y: 11 },
-      { x: 13, y: 11 },
-      { x: 14, y: 11 },
-    ];
+    this.body = [{ x: 11, y: 10 }];
     this.newSegments = 0;
+    this.inputs = [];
   }
 
   getInputDirection() {
-    window.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "ArrowUp":
-        case "W":
-        case "w":
-          if (this.direction.y !== 0) break;
-          this.direction = { x: 0, y: -1 };
-          break;
-        case "ArrowDown":
-        case "S":
-        case "s":
-          if (this.direction.y !== 0) break;
-          this.direction = { x: 0, y: 1 };
-          break;
-        case "ArrowLeft":
-        case "A":
-        case "a":
-          if (this.direction.x !== 0) break;
-          this.direction = { x: -1, y: 0 };
-          break;
-        case "ArrowRight":
-        case "D":
-        case "d":
-          if (this.direction.x !== 0) break;
-          this.direction = { x: 1, y: 0 };
-          break;
+    if (this.inputs.length) {
+      this.inputs = this.inputs.slice(0,1)
+      this.direction = this.inputs.shift();
+    }
+
+    window.addEventListener("keyup", (e) => {
+      if (e.code == "KeyW") {
+        if ((this.inputs.length ? this.inputs[0] : this.direction.y) !== 1) {
+          this.inputs.unshift({ x: 0, y: -1 });
+        }
+      } else if (e.code == "KeyS") {
+        if (this.direction.y !== -1) {
+          this.inputs.unshift({ x: 0, y: 1 });
+        }
+      } else if (e.code == "KeyA") {
+        if (this.direction.x !== 1) {
+          this.inputs.unshift({ x: -1, y: 0 });
+        }
+      } else if (e.code == "KeyD") {
+        if (this.direction.x !== -1) {
+          this.inputs.unshift({ x: 1, y: 0 });
+        }
       }
     });
   }
