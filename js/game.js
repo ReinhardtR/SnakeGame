@@ -46,7 +46,6 @@ main();
 async function main() {
   // Check if User has a high score greater than the current one
   if (!highScoreReceived && currentUser) {
-    console.log(currentUser.uid)
     highScore = await getUserHighScore(currentUser.uid);
   }
 

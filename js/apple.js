@@ -1,6 +1,6 @@
 export default class Apple {
   constructor() {
-    this.increaseAmount = 4;
+    this.increaseAmount = 1;
     this.position = this.spawn();
   }
 
