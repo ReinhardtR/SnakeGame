@@ -1,7 +1,7 @@
 @import "intro.css";
 @import "interface.css";
-@import "leaderboard.css";   
-@import "game.css"; 
+@import "leaderboard.css";
+@import "game.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
@@ -26,4 +26,61 @@ body {
 #game-wrap {
   display: flex;
   flex-direction: column;
+}
+
+/* Animations */
+/* Text */
+@keyframes pinkTextGlow {
+  from {
+    text-shadow: 0 0 5px rgb(234, 0, 217);
+  }
+  to {
+    text-shadow: 0 0 10px rgb(234, 0, 217);
+  }
+}
+
+@keyframes cyanTextGlow {
+  from {
+    text-shadow: 0 0 5px rgb(14, 220, 231);
+  }
+  to {
+    text-shadow: 0 0 10px rgb(14, 220, 231);
+  }
+}
+
+@keyframes yellowTextGlow {
+  from {
+    text-shadow: 0 0 5px rgb(255, 255, 0);
+  }
+  to {
+    text-shadow: 0 0 10px rgb(255, 255, 0);
+  }
+}
+
+/* Box */
+@keyframes pinkBoxGlow {
+  from {
+    box-shadow: 0 0 4px rgb(234, 0, 217);
+  }
+  to {
+    box-shadow: 0 0 16px rgb(234, 0, 217);
+  }
+}
+
+@keyframes cyanBoxGlow {
+  from {
+    box-shadow: 0 0 6px rgb(19, 62, 124), 0 0 8px rgb(19, 62, 124);
+  }
+  to {
+    box-shadow: 0 0 12px rgb(19, 62, 124), 0 0 16px rgb(19, 62, 124);
+  }
+}
+
+@keyframes yellowBoxGlow {
+  from {
+    box-shadow: 0 0 3px rgb(255, 255, 0), 0 0 6px rgb(255, 255, 0);
+  }
+  to {
+    box-shadow: 0 0 6px rgb(255, 255, 0), 0 0 12px rgb(255, 255, 0);
+  }
 }

@@ -1,3 +1,4 @@
+
 import Snake from "./snake.js";
 import Apple from "./apple.js";
 import { GUI } from "./interface.js";
@@ -35,6 +36,10 @@ var startGame = function (e) {
   }
 };
 
+export function resetHighScore()  {
+  highScore = 0;
+}
+
 // Start Main Loop
 main();
 
@@ -71,6 +76,7 @@ function update() {
     score++;
     while (snake.collision(apple.position)) {
       apple.spawn();
+      console.log("SPAWNING")
     }
   }
   checkDeath();

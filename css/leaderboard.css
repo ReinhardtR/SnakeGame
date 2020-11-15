@@ -5,10 +5,18 @@
   flex-direction: column;
   padding: 10px;
   color: white;
-  background-color: black;
+  background-color: rgb(9, 24, 51);
   font-size: 3.5vmin;
   align-items: center;
-  border: 0.3vmin solid rgb(170, 170, 50);
+  border: 0.5vmin solid;
+  border-color: rgb(113, 28, 145);
+  border-left: none;
+  animation: pinkBoxGlow 2s ease-in-out infinite alternate;
+}
+
+#leaderboard-title {
+  color: rgb(234, 0, 217);
+  animation: pinkTextGlow 1s ease-in-out infinite alternate;
 }
 
 .leaderboard-item {
@@ -19,9 +27,20 @@
   justify-content: space-between;
 }
 
+.leaderboard-username{
+  color: rgb(14, 220, 231);
+  animation: cyanTextGlow 1s ease-in-out infinite alternate;
+}
+
+.leaderboard-highscore {
+  color: rgb(234, 0, 217);
+  animation: pinkTextGlow 1s ease-in-out infinite alternate;
+}
+
 .leaderboard-divider {
   margin: 0.3vmin;
   width: 99%;
-  border-top: 0.1vmin solid #bbb;
+  border-top: 0.1vmin solid rgb(255, 255, 0);
   border-radius: 5px;
+  animation: yellowBoxGlow 1s ease-in-out infinite alternate;
 }

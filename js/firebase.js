@@ -1,5 +1,5 @@
-import { highScore } from "./game.js";
-import { createLeaderboard } from "./interface.js";
+import { highScore, resetHighScore } from "./game.js";
+import { createLeaderboard, createLogInSection } from "./interface.js";
 
 // Initialize
 var firebaseConfig = {
@@ -19,6 +19,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 export var currentUser;
 firebase.auth().onAuthStateChanged((user) => {
   currentUser = user;
+  createLogInSection(user);
 });
 
 // Login Function
@@ -30,6 +31,13 @@ export var logInFunction = () => {
       addUser(result.user.uid, result.user.displayName);
     });
 };
+
+// Logout Function
+export var logOutFunction = () => {
+  firebase.auth().signOut().then(() => {
+    resetHighScore();
+  })
+}
 
 // Add User to 'users' Collection
 export async function addUser(uid, username) {
