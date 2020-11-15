@@ -11,6 +11,4 @@ export function GUI(score, highScore) {
     .getElementById("sign-in-btn")
     .addEventListener("click", logInFunction);
   // Leaderboard
-  
-
 }

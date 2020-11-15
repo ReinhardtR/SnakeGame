@@ -18,7 +18,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 export var currentUser;
 firebase.auth().onAuthStateChanged((user) => {
   currentUser = user;
-})
+});
 
 // Login Function
 export var logInFunction = () => {
@@ -26,23 +26,25 @@ export var logInFunction = () => {
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      var user = result.user;
-      addUser(user.uid, user.displayName);
+      addUser(result.user.uid, result.user.displayName);
     });
 };
 
 // Add User to 'users' Collection
-export function addUser(uid, username) {
+export async function addUser(uid, username) {
   var userDoc = firestore.collection("users").doc(uid);
-  // If user is already in database, check if the stored highscore is greater than the current highscore
-  if (userDoc.exists) {
-    var setHighScore =
-      highScore > userDoc.highScore ? highScore : userDoc.highScore;
-  }
+
   // Create database document for the user
   userDoc.set({
     username: username,
-    highScore: setHighScore,
+    highScore: await compareHighScores(userDoc),
+  });
+}
+
+// Returns the highest score between the database and the instance
+function compareHighScores(userDoc) {
+  return userDoc.get().then((doc) => {
+    return doc.data().highScore > highScore ? doc.data().highScore : highScore;
   });
 }
 
