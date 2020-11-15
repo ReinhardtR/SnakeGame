@@ -4,6 +4,7 @@ export default class Apple {
     this.position = this.spawn();
   }
 
+  // Spawn apple in a random position
   spawn() {
     const gridSize = 21;
     return (this.position = {
@@ -12,6 +13,7 @@ export default class Apple {
     });
   }
 
+  // Draw Apple on game board
   draw(gameBoard) {
     const appleElement = document.createElement("div");
     appleElement.style.gridColumnStart = this.position.x;

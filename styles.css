@@ -7,17 +7,64 @@ body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-template-rows: auto;
-  grid-template-areas:
-    ". main .";
+  grid-template-areas: ". main .";
 }
 
-/* Wraps */
+/* Intro Animation */
+#intro {
+  grid-area: main;
+  height: 0;
+  width: 100%;
+  color: white;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 0px 16px 16px;
+  animation-name: moveUp;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes moveUp {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
+
+#intro > span {
+  color: blue;
+  opacity: 0;
+  animation-name: fadeOut;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Game-Wrap and Leaderboard */
 #main-wrap {
   grid-area: main;
   display: flex;
   flex-wrap: wrap;
 }
 
+/* Game and Interface */
 #game-wrap {
   display: flex;
   flex-direction: column;
@@ -47,6 +94,9 @@ body {
   height: 3vmin;
   font-size: 3vmin;
   font-weight: bold;
+}
+
+#sign-in-wrap {
 }
 
 /* Leaderboard */

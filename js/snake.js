@@ -1,41 +1,42 @@
 export default class Snake {
   constructor() {
+    this.changingDirection = false;
     this.direction = { x: 1, y: 0 };
     this.body = [
       { x: 11, y: 10 },
       { x: 12, y: 10 },
     ];
     this.newSegments = 0;
-    this.inputs = [];
   }
 
+  // Handle control inputs
   getInputDirection() {
-    if (this.inputs.length) {
-      this.inputs = this.inputs.slice(0, 1);
-      this.direction = this.inputs.shift();
-    }
-
-    window.addEventListener("keyup", (e) => {
-      if (e.code == "KeyW") {
-        if ((this.inputs.length ? this.inputs[0] : this.direction.y) !== 1) {
-          this.inputs.unshift({ x: 0, y: -1 });
-        }
-      } else if (e.code == "KeyS") {
-        if (this.direction.y !== -1) {
-          this.inputs.unshift({ x: 0, y: 1 });
-        }
-      } else if (e.code == "KeyA") {
-        if (this.direction.x !== 1) {
-          this.inputs.unshift({ x: -1, y: 0 });
-        }
-      } else if (e.code == "KeyD") {
-        if (this.direction.x !== -1) {
-          this.inputs.unshift({ x: 1, y: 0 });
-        }
+    window.addEventListener("keydown", (e) => {
+      // If snake is already changing direction, return
+      if (this.changingDirection) return;
+      this.changingDirection = true;
+      switch (e.code) {
+        case "KeyW":
+          if (this.direction.y !== 0) break;
+          this.direction = { x: 0, y: -1 };
+          break;
+        case "KeyS":
+          if (this.direction.y !== 0) break;
+          this.direction = { x: 0, y: 1 };
+          break;
+        case "KeyA":
+          if (this.direction.x !== 0) break;
+          this.direction = { x: -1, y: 0 };
+          break;
+        case "KeyD":
+          if (this.direction.x !== 0) break;
+          this.direction = { x: 1, y: 0 };
+          break;
       }
     });
   }
 
+  // Update snake position
   update() {
     this.getInputDirection();
     this.addSegments();
@@ -47,19 +48,19 @@ export default class Snake {
     this.body[0].y += this.direction.y;
   }
 
+  // Draw snake on the game board
   draw(gameBoard) {
     this.body.forEach((segment, index) => {
       const snakeElement = document.createElement("div");
       snakeElement.style.gridColumnStart = segment.x;
       snakeElement.style.gridRowStart = segment.y;
       snakeElement.classList.add("snake");
-      if (index === 0) {
-        snakeElement.classList.add("snake-head");
-      }
+      if (index === 0) snakeElement.classList.add("snake-head");
       gameBoard.appendChild(snakeElement);
     });
   }
 
+  // Check collision for the body and the given position
   collision(position, { ignoreHead = false } = {}) {
     return this.body.some((segment, index) => {
       if (ignoreHead && index === 0) return false;
@@ -67,6 +68,7 @@ export default class Snake {
     });
   }
 
+  // Check collsion with the grid
   gridCollision() {
     return (
       this.body[0].x < 1 ||
@@ -76,10 +78,12 @@ export default class Snake {
     );
   }
 
+  // Check collision with own body
   selfCollision() {
     return this.collision(this.body[0], { ignoreHead: true });
   }
 
+  // Adds segments to the body, when there is new segments
   addSegments() {
     for (let i = 0; i < this.newSegments; i++) {
       this.body.push({ ...this.body[this.body.length - 1] });

@@ -1,16 +1,26 @@
 import Snake from "./snake.js";
 import Apple from "./apple.js";
 import { GUI } from "./interface.js";
-import { addUser } from "./leaderboard.js";
+import {
+  currentUser,
+  getUserHighScore,
+  setNewHighScore,
+  highScoreReceived,
+} from "./firebase.js";
 
+// Docs
+const gameBoard = document.getElementById("game-board");
+
+// Game Variables
+const gameSpeed = 100;
+export var highScore = 0;
+var score = 0;
+var isAlive = false;
+var textOnScreen = false;
 var snake;
 var apple;
 
-var isAlive = false;
-var score = 0;
-var highScore = 0;
-
-// Event Functions
+// Event Listener Function
 var startGame = function (e) {
   if (
     e.code === "KeyW" ||
@@ -25,40 +35,33 @@ var startGame = function (e) {
   }
 };
 
-// Docs
-const gameBoard = document.getElementById("game-board");
-var textOnScreen = false;
+// Start Main Loop
+main();
 
-var speed = 10;
-var lastRenderTime = 0;
-function main(currentTime) {
-  window.requestAnimationFrame(main);
-  const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-  if (secondsSinceLastRender < 1 / speed) return;
-  lastRenderTime = currentTime;
+async function main(currentTime) {
+  // Check if User has a high score greater than the current one
+  if (!highScoreReceived && currentUser) {
+    highScore = await getUserHighScore(currentUser.uid);
+  }
 
-  GUI(score, highScore, isAlive);
+  // Show GUI
+  GUI(score, highScore);
 
+  // Show Text on Screen if game isn't being played
   if (!isAlive) {
-    if (!textOnScreen) {
-      screenText("Press W, A, S or D to Start");
-    }
+    if (!textOnScreen) screenText("Press W, A, S or D to Start");
     window.addEventListener("keydown", startGame);
   } else {
+    snake.changingDirection = false;
     update();
     draw();
     window.removeEventListener("keydown", startGame);
   }
-}
 
-window.requestAnimationFrame(main);
-
-function screenText(text) {
-  var guiElement = document.createElement("div");
-  guiElement.id = "screen-text";
-  guiElement.innerHTML = text;
-  gameBoard.append(guiElement);
-  textOnScreen = true;
+  // Loop
+  setTimeout(() => {
+    main();
+  }, gameSpeed);
 }
 
 function update() {
@@ -83,8 +86,17 @@ function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
     isAlive = false;
     if (score > highScore) {
-      score = highScore;
+      highScore = score;
+      if (currentUser) setNewHighScore(currentUser.uid);
     }
     textOnScreen = false;
   }
+}
+
+function screenText(text) {
+  var guiElement = document.createElement("div");
+  guiElement.id = "screen-text";
+  guiElement.innerHTML = text;
+  gameBoard.append(guiElement);
+  textOnScreen = true;
 }
