@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snake</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./css/main.css">
   <script src="js/game.js" defer type="module"></script>
 </head>
 
@@ -22,28 +22,24 @@
           <span id="high-score"></span>
         </div>
         <div id="sign-in-wrap">
-          <button id="sign-in-btn"></button>
+          <div id="sign-in-btn">
+            <img id="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              alt="G"></img>
+            <p>Sign in with Google</p>
+          </div>
+          <p>To be on the leaderboard</p>
         </div>
       </div>
       <div id="game-board"></div>
     </div>
     <div id="leaderboard">
       Leaderboard
-      <hr class="leaderboard-divider">
-      </hr>
-      <div class="leaderboard-item">Tekst</div>
-      <hr class="leaderboard-divider">
-      </hr>
-      <div class="leaderboard-item">Tekst</div>
-      <hr class="leaderboard-divider">
-      </hr>
-      <div class="leaderboard-item">Tekst</div>
     </div>
   </div>
   <div id="intro">
-    <span>Snake</span>
-    <span>Made by Reinhardt</span>
-    <span>GitHub.com/ReinhardtR</span>
+    <span id="first-line">Snake</span>
+    <span id="second-line">Made by Reinhardt</span>
+    <span id="third-line">GitHub.com/ReinhardtR</span>
   </div>
 
   <!-- Firebase -->

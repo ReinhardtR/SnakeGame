@@ -1,4 +1,5 @@
 import { highScore } from "./game.js";
+import { createLeaderboard } from "./interface.js";
 
 // Initialize
 var firebaseConfig = {
@@ -33,7 +34,6 @@ export var logInFunction = () => {
 // Add User to 'users' Collection
 export async function addUser(uid, username) {
   var userDoc = firestore.collection("users").doc(uid);
-
   // Create database document for the user
   userDoc.set({
     username: username,
@@ -67,3 +67,17 @@ export function setNewHighScore(uid) {
     highScore: highScore,
   });
 }
+
+// Listen to high score changes and get snapshot
+var leaderboardArray = [];
+firestore.collection("users").onSnapshot((querySnapshot) => {
+  // Clear array
+  leaderboardArray = [];
+  querySnapshot.forEach((doc) => {
+    // Add to array
+    leaderboardArray.push(doc.data());
+    // Sort array by user highscore (Descending)
+    leaderboardArray.sort((a, b) => b.highScore - a.highScore);
+  });
+  createLeaderboard(leaderboardArray);
+});

@@ -12,7 +12,7 @@ import {
 const gameBoard = document.getElementById("game-board");
 
 // Game Variables
-const gameSpeed = 100;
+const gameSpeed = 60;
 export var highScore = 0;
 var score = 0;
 var isAlive = false;

@@ -1,0 +1,59 @@
+#intro {
+  grid-area: main;
+  height: 0;
+  width: 100%;
+  color: white;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 0px 16px 16px;
+  animation-name: moveUp;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes moveUp {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
+
+#intro > span {
+  opacity: 0;
+  animation-name: fadeOut;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  animation-delay: 0.2s;
+}
+
+#first-line {
+  color: blue;
+  font-size: 6vmin;
+}
+
+#second-line {
+  color: orange;
+  font-size: 3vmin;
+}
+
+#third-line {
+  color: white;
+  font-size: 2vmin;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

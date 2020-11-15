@@ -1,0 +1,29 @@
+@import "intro.css";
+@import "interface.css";
+@import "leaderboard.css";   
+@import "game.css"; 
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+  background-color: rgb(25, 25, 25);
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: ". main .";
+}
+
+/* Game-Wrap and Leaderboard */
+#main-wrap {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Game and Interface */
+#game-wrap {
+  display: flex;
+  flex-direction: column;
+}
