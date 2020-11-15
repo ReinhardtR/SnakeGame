@@ -43,9 +43,10 @@ export function resetHighScore()  {
 // Start Main Loop
 main();
 
-async function main(currentTime) {
+async function main() {
   // Check if User has a high score greater than the current one
   if (!highScoreReceived && currentUser) {
+    console.log(currentUser.uid)
     highScore = await getUserHighScore(currentUser.uid);
   }
 
@@ -76,7 +77,6 @@ function update() {
     score++;
     while (snake.collision(apple.position)) {
       apple.spawn();
-      console.log("SPAWNING")
     }
   }
   checkDeath();

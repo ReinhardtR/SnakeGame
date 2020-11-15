@@ -28,20 +28,25 @@ export var logInFunction = () => {
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      addUser(result.user.uid, result.user.displayName);
+      if (result.user) {
+        addUser(result.user.uid, result.user.displayName);
+      }
     });
 };
 
 // Logout Function
 export var logOutFunction = () => {
-  firebase.auth().signOut().then(() => {
-    resetHighScore();
-  })
-}
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      resetHighScore();
+    });
+};
 
 // Add User to 'users' Collection
 export async function addUser(uid, username) {
-  var userDoc = firestore.collection("users").doc(uid);
+  var userDoc = await firestore.collection("users").doc(uid);
   // Create database document for the user
   userDoc.set({
     username: username,
@@ -52,7 +57,13 @@ export async function addUser(uid, username) {
 // Returns the highest score between the database and the instance
 function compareHighScores(userDoc) {
   return userDoc.get().then((doc) => {
-    return doc.data().highScore > highScore ? doc.data().highScore : highScore;
+    if (doc.data()) {
+      return doc.data().highScore > highScore
+        ? doc.data().highScore
+        : highScore;
+    } else {
+      return highScore;
+    }
   });
 }
 
@@ -65,7 +76,13 @@ export function getUserHighScore(uid) {
     .get()
     .then((doc) => {
       highScoreReceived = true;
-      return doc.data().highScore;
+      if (doc.data()) {
+        return doc.data().highScore > highScore
+          ? doc.data().highScore
+          : highScore;
+      } else {
+        return highScore;
+      }
     });
 }
 
