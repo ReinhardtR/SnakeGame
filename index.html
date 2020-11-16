@@ -6,13 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snake</title>
   <link rel="stylesheet" href="./css/main.css">
+  <script src="https://kit.fontawesome.com/b169b872b4.js" crossorigin="anonymous"></script>
   <script src="js/game.js" defer type="module"></script>
 </head>
 
 <body>
+  <audio loop muted id="audio">
+    <source id="audio-source" src="">
+  </audio>
   <div id="main-wrap">
     <div id="game-wrap">
       <div id="interface">
+        <div id="volume-slider-wrap">
+          <div id="volume-text">
+            <em class="fas fa-volume-down" id="mute-button"></em>
+            Volume
+          </div>
+          <input type="range" min="0" max="100" value="25" id="slider">
+        </div>
         <div class="score-wrap">
           <div class="score-title">Score</div>
           <span id="current-score"></span>

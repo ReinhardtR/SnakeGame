@@ -92,3 +92,43 @@ export function createLeaderboard(leaderboardArray) {
     leaderboardItem.appendChild(highScoreText);
   }
 }
+
+// Play music based on game state
+export function playMusic(musicFileLocation) {
+  var audio = document.getElementById("audio");
+  var source = document.getElementById("audio-source");
+  source.src = musicFileLocation;
+  audio.load();
+  audio.play();
+}
+
+// Change volume based on slider value
+var slider = document.getElementById("slider");
+slider.oninput = function () {
+  changeAudioVolume(slider.value / 100);
+};
+
+export function changeAudioVolume(volume) {
+  audio.volume = volume;
+}
+
+export function unMuteAudio() {
+  document.getElementById("audio").muted = false;
+}
+
+export function addMuteButtonListener() {
+  document
+  .getElementById("volume-text")
+  .addEventListener("click", changeAudioMuteState);
+
+}
+
+var changeAudioMuteState = function () {
+  var audio = document.getElementById("audio");
+  if (audio.muted) {
+    audio.muted = false;
+  } else {
+    audio.muted = true;
+  }
+  console.log(audio.muted)
+};

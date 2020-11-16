@@ -10,6 +10,54 @@
   animation: pinkBoxGlow 2s ease-in-out infinite alternate;
 }
 
+/* Audio Section */
+#volume-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3vmin;
+}
+
+#volume-text {
+  margin-bottom: 2vmin;
+  height: 3vmin;
+  font-size: 3vmin;
+  font-weight: bold;
+  color: rgb(234, 0, 217);
+  animation: pinkTextGlow 1s ease-in-out infinite alternate;
+}
+
+#slider {
+  margin-bottom: 3.5vmin;
+  height: 2vmin;
+  width: 14vmin;
+  -webkit-appearance: none;
+  color: rgb(255, 255, 0);
+  background-color: rgb(14, 220, 231);
+  border-radius: 16px;
+  animation: cyanBoxGlow 2s ease-in-out infinite alternate;
+}
+
+#slider:hover {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: none;
+}
+
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgb(255, 255, 0);
+  cursor: pointer;
+  animation: yellowBoxGlow 2s ease-in-out infinite alternate;
+}
+
+/* Scores Section*/
 .score-wrap {
   flex-grow: 1;
   font-size: 5vmin;
@@ -31,6 +79,7 @@
   animation: cyanTextGlow 1s ease-in-out infinite alternate;
 }
 
+/* Sign In Section */
 #sign-in-wrap {
   display: flex;
   flex-direction: column;
@@ -91,10 +140,11 @@
 .sign-out-text {
   font-size: 1.5vmin;
   color: rgb(19, 62, 124);
+  transition: 0.2s;
 }
 
 .sign-out-text:hover {
   cursor: pointer;
-  color: rgb(255,255,0);
+  color: rgb(255, 255, 0);
   animation: yellowTextGlow 1s ease-in-out infinite alternate;
 }

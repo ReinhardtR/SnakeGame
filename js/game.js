@@ -1,13 +1,21 @@
-
 import Snake from "./snake.js";
 import Apple from "./apple.js";
-import { GUI } from "./interface.js";
+import {
+  GUI,
+  playMusic,
+  changeAudioVolume,
+  addMuteButtonListener,
+} from "./interface.js";
 import {
   currentUser,
   getUserHighScore,
   setNewHighScore,
   highScoreReceived,
 } from "./firebase.js";
+
+// Set initial volume
+changeAudioVolume(0.25);
+addMuteButtonListener();
 
 // Docs
 const gameBoard = document.getElementById("game-board");
@@ -18,6 +26,7 @@ export var highScore = 0;
 var score = 0;
 var isAlive = false;
 var textOnScreen = false;
+var changeMusic = true;
 var snake;
 var apple;
 
@@ -31,12 +40,13 @@ var startGame = function (e) {
   ) {
     score = 0;
     isAlive = true;
+    changeMusic = true;
     snake = new Snake();
     apple = new Apple();
   }
 };
 
-export function resetHighScore()  {
+export function resetHighScore() {
   highScore = 0;
 }
 
@@ -52,14 +62,30 @@ async function main() {
   // Show GUI
   GUI(score, highScore);
 
-  // Show Text on Screen if game isn't being played
+  // Check if player is alive
   if (!isAlive) {
+    // Show text on screen if not already showing
     if (!textOnScreen) screenText("Press W, A, S or D to Start");
+    // Play intro music if not already playing
+    if (changeMusic) {
+      playMusic("./music/intro.mp3");
+      changeMusic = false;
+    }
+    // Add event listener for startGame
     window.addEventListener("keydown", startGame);
   } else {
+    // Reset direction boolean
     snake.changingDirection = false;
+    // Update game
     update();
+    // Draw game
     draw();
+    // Play game music if not already playing
+    if (changeMusic) {
+      playMusic("./music/game.mp3");
+      changeMusic = false;
+    }
+    // Remove event listener for startGame
     window.removeEventListener("keydown", startGame);
   }
 
@@ -89,6 +115,7 @@ function draw() {
 
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
+    changeMusic = true;
     isAlive = false;
     if (score > highScore) {
       highScore = score;
