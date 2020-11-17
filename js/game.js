@@ -59,7 +59,7 @@ async function main() {
     // Show text on screen if not already showing
     if (!textOnScreen) screenText("Press W, A, S or D to Start");
     // Play intro music if not already playing
-    if (timeToChangeMusic) changeMusic("./music/intro.mp3");
+    if (timeToChangeMusic) changeMusic("./audio/intro.mp3");
     // Add event listener for startGame
     window.addEventListener("keydown", startGame);
   } else {
@@ -70,7 +70,7 @@ async function main() {
     // Draw game
     draw();
     // Play game music if not already playing
-    if (timeToChangeMusic) changeMusic("./music/game.mp3");
+    if (timeToChangeMusic) changeMusic("./audio/game.mp3");
     // Remove event listener for startGame
     window.removeEventListener("keydown", startGame);
   }
@@ -84,7 +84,7 @@ async function main() {
 function update() {
   snake.update();
   if (snake.collision(apple.position)) {
-    playSoundOnce("./music/point.mp3");
+    playSoundOnce("./audio/point.mp3");
     snake.newSegments += apple.increaseAmount;
     score++;
     while (snake.collision(apple.position)) {
@@ -102,7 +102,7 @@ function draw() {
 
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
-    changeMusic("./music/intro.mp3")
+    changeMusic("./audio/intro.mp3")
     if (score > highScore) {
       highScore = score;
       if (currentUser) setNewHighScore(currentUser.uid);
