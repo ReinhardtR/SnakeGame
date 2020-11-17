@@ -1,6 +1,11 @@
 import Snake from "./snake.js";
 import Apple from "./apple.js";
-import { GUI, playMusic, addMuteButtonListener } from "./interface.js";
+import { updateScores } from "./interface/scores.js";
+import { musicMuteButtonListener, playMusic } from "./interface/music.js";
+import {
+  soundEffectsMuteButtonListener,
+  playSoundOnce,
+} from "./interface/soundEffects.js";
 import {
   currentUser,
   getUserHighScore,
@@ -8,9 +13,12 @@ import {
   highScoreReceived,
 } from "./firebase.js";
 
-// Docs
+// Get gameboard reference
 const gameBoard = document.getElementById("game-board");
-addMuteButtonListener();
+
+// Add listeners
+musicMuteButtonListener();
+soundEffectsMuteButtonListener();
 
 // Game Variables
 const gameSpeed = 60;
@@ -52,7 +60,7 @@ async function main() {
   }
 
   // Show GUI
-  GUI(score, highScore);
+  updateScores(score, highScore);
 
   // Check if player is alive
   if (!isAlive) {
@@ -102,7 +110,8 @@ function draw() {
 
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
-    changeMusic("./audio/intro.mp3")
+    playSoundOnce("./audio/death.mp3");
+    changeMusic("./audio/intro.mp3");
     if (score > highScore) {
       highScore = score;
       if (currentUser) setNewHighScore(currentUser.uid);
@@ -123,19 +132,4 @@ function screenText(text) {
 function changeMusic(musicFileLocation) {
   playMusic(musicFileLocation);
   timeToChangeMusic = false;
-}
-
-function playSoundOnce(audioFileLocation) {
-  // Get elements
-  var music = document.getElementById("music");
-  var audio = document.getElementById("audio");
-  var audioSrc = document.getElementById("audio-src")
-  // Change audio source
-  audioSrc.src = audioFileLocation
-  // Match audio settings with music settings
-  audio.volume = music.volume;
-  audio.muted = music.muted;
-  // Play sound
-  audio.load();
-  audio.play();
 }

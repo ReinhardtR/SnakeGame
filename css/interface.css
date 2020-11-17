@@ -15,17 +15,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   margin-left: 3vmin;
 }
 
-#mute-button {
+#music-mute-button,
+#effects-mute-button {
   display: inline-block;
   width: 3vmin;
   transition: 0.2s;
 }
 
-#mute-button:hover {
+#music-mute-button:hover,
+#effects-mute-button:hover {
   cursor: pointer;
   color: rgb(255, 255, 0);
   animation: yellowTextGlow 2s ease-in-out infinite alternate;
@@ -40,7 +41,8 @@
   animation: pinkTextGlow 1s ease-in-out infinite alternate;
 }
 
-#slider {
+#music-slider,
+#effects-slider {
   margin-bottom: 3.5vmin;
   height: 2vmin;
   width: 14vmin;
@@ -52,7 +54,8 @@
   transition: 0.5s;
 }
 
-#slider:hover {
+#music-slider:hover,
+#effects-slider:hover {
   cursor: pointer;
 }
 
@@ -60,18 +63,20 @@
   outline: none;
 }
 
-#slider::-webkit-slider-thumb {
+#music-slider::-webkit-slider-thumb,
+#effects-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background:  rgb(19, 62, 124);
+  background: rgb(19, 62, 124);
   cursor: pointer;
   animation: yellowBoxGlow 2s ease-in-out infinite alternate;
   transition: 0.5s;
 }
 
-#slider::-webkit-slider-thumb:hover {
+#music-slider::-webkit-slider-thumb:hover,
+#effects-slider::-webkit-slider-thumb:hover {
   background: rgb(255, 255, 0);
 }
 

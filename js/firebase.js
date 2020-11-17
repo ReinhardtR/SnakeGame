@@ -1,5 +1,6 @@
 import { highScore, resetHighScore } from "./game.js";
-import { createLeaderboard, createLogInSection } from "./interface.js";
+import { createLeaderboard } from "./interface/leaderboard.js";
+import { createLogInSection } from "./interface/logInSection.js";
 
 // Initialize
 var firebaseConfig = {

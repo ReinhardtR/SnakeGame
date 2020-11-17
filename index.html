@@ -14,20 +14,27 @@
   <audio loop autoplay="false" id="music">
     <source id="music-source" src="">
   </audio>
-  <audio autoplay="false" id="audio">
-    <source id="audio-src" src="">
+  <audio autoplay="false" id="sound-effects">
+    <source id="sound-effects-src" src="">
   </audio>
   <div id="main-wrap">
     <div id="game-wrap">
       <div id="interface">
         <div id="volume-slider-wrap">
           <div id="volume-text">
-            <span id="mute-button">
-              <em class="fas fa-volume-mute" id="volume-icon"></em>
+            Music
+            <span id="music-mute-button">
+              <em class="fas fa-volume-mute" id="music-volume-icon"></em>
             </span>
-            Volume
+            <input type="range" min="0" max="100" value="20" id="music-slider">
           </div>
-          <input type="range" min="0" max="100" value="20" id="slider">
+          <div id="volume-text">
+            Effects
+            <span id="effects-mute-button">
+              <em class="fas fa-volume-mute" id="effects-volume-icon"></em>
+            </span>
+            <input type="range" min="0" max="100" value="20" id="effects-slider">
+          </div>
         </div>
         <div class="score-wrap">
           <div class="score-title">Score</div>
