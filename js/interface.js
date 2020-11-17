@@ -68,7 +68,7 @@ export function createLeaderboard(leaderboardArray) {
   leaderboardTitle.id = "leaderboard-title";
   leaderboardTitle.innerHTML = "Leaderboard";
   leaderboard.appendChild(leaderboardTitle);
-  for (var user of leaderboardArray) {
+  for (let i = 0; i < leaderboardArray.length; i++) {
     // Divider
     let leaderboardDivider = document.createElement("hr");
     leaderboardDivider.classList.add("leaderboard-divider");
@@ -80,55 +80,62 @@ export function createLeaderboard(leaderboardArray) {
     leaderboard.appendChild(leaderboardItem);
 
     // Text
+    let positionText = document.createElement("span");
+    positionText.classList.add("leaderboard-highscore", "leaderboard-position");
+    positionText.innerHTML = `${i+1}.`;
+    leaderboardItem.appendChild(positionText);
     // Username
     let usernameText = document.createElement("span");
     usernameText.classList.add("leaderboard-username");
-    usernameText.innerHTML = user.username;
+    usernameText.innerHTML = leaderboardArray[i].username;
     leaderboardItem.appendChild(usernameText);
     // Highscore
     let highScoreText = document.createElement("span");
     highScoreText.classList.add("leaderboard-highscore");
-    highScoreText.innerHTML = user.highScore;
+    highScoreText.innerHTML = leaderboardArray[i].highScore;
     leaderboardItem.appendChild(highScoreText);
   }
 }
 
 // Play music based on game state
+var music = document.getElementById("music");
+var source = document.getElementById("music-source");
+music.muted = true;
 export function playMusic(musicFileLocation) {
-  var audio = document.getElementById("audio");
-  var source = document.getElementById("audio-source");
   source.src = musicFileLocation;
-  audio.load();
-  audio.play();
+  if (!music.muted) {
+    music.load();
+    music.play();
+  }
 }
 
 // Change volume based on slider value
 var slider = document.getElementById("slider");
 slider.oninput = function () {
-  changeAudioVolume(slider.value / 100);
+  music.volume = slider.value / 100;
+  changeVolumeIcon();
 };
 
-export function changeAudioVolume(volume) {
-  audio.volume = volume;
-}
-
-export function unMuteAudio() {
-  document.getElementById("audio").muted = false;
-}
-
 export function addMuteButtonListener() {
-  document
-  .getElementById("volume-text")
-  .addEventListener("click", changeAudioMuteState);
-
+  var muteButton = document.getElementById("mute-button");
+  muteButton.addEventListener("click", changeAudioMuteState);
 }
 
 var changeAudioMuteState = function () {
-  var audio = document.getElementById("audio");
-  if (audio.muted) {
-    audio.muted = false;
-  } else {
-    audio.muted = true;
-  }
-  console.log(audio.muted)
+  music.muted = !music.muted;
+  playMusic(source.src);
+  changeVolumeIcon();
 };
+
+function changeVolumeIcon() {
+  var icon = document.getElementById("volume-icon")
+  if (!music.muted && slider.value > 0.9 ) {
+    if (slider.value > 50) {
+      icon.classList = "fas fa-volume-up";
+    } else {
+      icon.classList = "fas fa-volume-down";
+    }
+  } else {
+    icon.classList = "fas fa-volume-mute";
+  }
+}

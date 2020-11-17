@@ -1,6 +1,6 @@
 #leaderboard {
   grid-column: 3 / 4;
-  width: 25vmin;
+  width: 28vmin;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -27,7 +27,12 @@
   justify-content: space-between;
 }
 
+.leaderboard-position {
+  width: 2.5vmin;
+}
+
 .leaderboard-username{
+  flex-grow: 1;
   color: rgb(14, 220, 231);
   animation: cyanTextGlow 1s ease-in-out infinite alternate;
 }

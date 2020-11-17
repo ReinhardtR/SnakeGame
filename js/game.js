@@ -1,11 +1,6 @@
 import Snake from "./snake.js";
 import Apple from "./apple.js";
-import {
-  GUI,
-  playMusic,
-  changeAudioVolume,
-  addMuteButtonListener,
-} from "./interface.js";
+import { GUI, playMusic, addMuteButtonListener } from "./interface.js";
 import {
   currentUser,
   getUserHighScore,
@@ -13,12 +8,9 @@ import {
   highScoreReceived,
 } from "./firebase.js";
 
-// Set initial volume
-changeAudioVolume(0.25);
-addMuteButtonListener();
-
 // Docs
 const gameBoard = document.getElementById("game-board");
+addMuteButtonListener();
 
 // Game Variables
 const gameSpeed = 60;
@@ -26,7 +18,7 @@ export var highScore = 0;
 var score = 0;
 var isAlive = false;
 var textOnScreen = false;
-var changeMusic = true;
+var timeToChangeMusic = true;
 var snake;
 var apple;
 
@@ -40,7 +32,7 @@ var startGame = function (e) {
   ) {
     score = 0;
     isAlive = true;
-    changeMusic = true;
+    timeToChangeMusic = true;
     snake = new Snake();
     apple = new Apple();
   }
@@ -67,10 +59,7 @@ async function main() {
     // Show text on screen if not already showing
     if (!textOnScreen) screenText("Press W, A, S or D to Start");
     // Play intro music if not already playing
-    if (changeMusic) {
-      playMusic("./music/intro.mp3");
-      changeMusic = false;
-    }
+    if (timeToChangeMusic) changeMusic("./music/intro.mp3");
     // Add event listener for startGame
     window.addEventListener("keydown", startGame);
   } else {
@@ -81,10 +70,7 @@ async function main() {
     // Draw game
     draw();
     // Play game music if not already playing
-    if (changeMusic) {
-      playMusic("./music/game.mp3");
-      changeMusic = false;
-    }
+    if (timeToChangeMusic) changeMusic("./music/game.mp3");
     // Remove event listener for startGame
     window.removeEventListener("keydown", startGame);
   }
@@ -98,6 +84,7 @@ async function main() {
 function update() {
   snake.update();
   if (snake.collision(apple.position)) {
+    playSoundOnce("./music/point.mp3");
     snake.newSegments += apple.increaseAmount;
     score++;
     while (snake.collision(apple.position)) {
@@ -115,13 +102,13 @@ function draw() {
 
 function checkDeath() {
   if (snake.gridCollision() || snake.selfCollision()) {
-    changeMusic = true;
-    isAlive = false;
+    changeMusic("./music/intro.mp3")
     if (score > highScore) {
       highScore = score;
       if (currentUser) setNewHighScore(currentUser.uid);
     }
     textOnScreen = false;
+    isAlive = false;
   }
 }
 
@@ -131,4 +118,24 @@ function screenText(text) {
   guiElement.innerHTML = text;
   gameBoard.append(guiElement);
   textOnScreen = true;
+}
+
+function changeMusic(musicFileLocation) {
+  playMusic(musicFileLocation);
+  timeToChangeMusic = false;
+}
+
+function playSoundOnce(audioFileLocation) {
+  // Get elements
+  var music = document.getElementById("music");
+  var audio = document.getElementById("audio");
+  var audioSrc = document.getElementById("audio-src")
+  // Change audio source
+  audioSrc.src = audioFileLocation
+  // Match audio settings with music settings
+  audio.volume = music.volume;
+  audio.muted = music.muted;
+  // Play sound
+  audio.load();
+  audio.play();
 }

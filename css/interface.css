@@ -19,6 +19,18 @@
   margin-left: 3vmin;
 }
 
+#mute-button {
+  display: inline-block;
+  width: 3vmin;
+  transition: 0.2s;
+}
+
+#mute-button:hover {
+  cursor: pointer;
+  color: rgb(255, 255, 0);
+  animation: yellowTextGlow 2s ease-in-out infinite alternate;
+}
+
 #volume-text {
   margin-bottom: 2vmin;
   height: 3vmin;
@@ -37,6 +49,7 @@
   background-color: rgb(14, 220, 231);
   border-radius: 16px;
   animation: cyanBoxGlow 2s ease-in-out infinite alternate;
+  transition: 0.5s;
 }
 
 #slider:hover {
@@ -52,9 +65,14 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: rgb(255, 255, 0);
+  background:  rgb(19, 62, 124);
   cursor: pointer;
   animation: yellowBoxGlow 2s ease-in-out infinite alternate;
+  transition: 0.5s;
+}
+
+#slider::-webkit-slider-thumb:hover {
+  background: rgb(255, 255, 0);
 }
 
 /* Scores Section*/
