@@ -3,7 +3,7 @@
   width: 28vmin;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 1vmin;
   color: white;
   background-color: rgb(9, 24, 51);
   font-size: 3.5vmin;
@@ -28,11 +28,13 @@
 }
 
 .leaderboard-position {
-  width: 2.5vmin;
+  width: 3vmin;
 }
 
-.leaderboard-username{
+.leaderboard-username {
   flex-grow: 1;
+  line-height: 2.5vmin;
+  margin: 0.5vmin 0px 0.5vmin 0.5vmin;
   color: rgb(14, 220, 231);
   animation: cyanTextGlow 1s ease-in-out infinite alternate;
 }
@@ -45,7 +47,8 @@
 .leaderboard-divider {
   margin: 0.3vmin;
   width: 99%;
+  color: rgb(255, 255, 0);
   border-top: 0.1vmin solid rgb(255, 255, 0);
-  border-radius: 5px;
+  border-radius: 2vmin;
   animation: yellowBoxGlow 1s ease-in-out infinite alternate;
 }

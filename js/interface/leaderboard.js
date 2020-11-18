@@ -34,4 +34,8 @@ export function createLeaderboard(leaderboardArray) {
     highScoreText.innerHTML = leaderboardArray[i].highScore;
     leaderboardItem.appendChild(highScoreText);
   }
+  // Bottom yellow line
+  let lastLeaderboardDivider = document.createElement("hr");
+  lastLeaderboardDivider.classList.add("leaderboard-divider");
+  leaderboard.appendChild(lastLeaderboardDivider);
 }

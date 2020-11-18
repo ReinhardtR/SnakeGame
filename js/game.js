@@ -30,13 +30,17 @@ var timeToChangeMusic = true;
 var snake;
 var apple;
 
-// Event Listener Function
+// Event Listener Function to start the game
 var startGame = function (e) {
   if (
     e.code === "KeyW" ||
     e.code === "KeyS" ||
     e.code === "KeyA" ||
-    e.code === "KeyD"
+    e.code === "KeyD" ||
+    e.code === "ArrowUp" ||
+    e.code === "ArrowDown" ||
+    e.code === "ArrowLeft" ||
+    e.code === "ArrowRight"
   ) {
     score = 0;
     isAlive = true;
@@ -65,7 +69,7 @@ async function main() {
   // Check if player is alive
   if (!isAlive) {
     // Show text on screen if not already showing
-    if (!textOnScreen) screenText("Press W, A, S or D to Start");
+    if (!textOnScreen) screenText("Press W, A, S, D or Arrow Keys to Start");
     // Play intro music if not already playing
     if (timeToChangeMusic) changeMusic("./audio/intro.mp3");
     // Add event listener for startGame

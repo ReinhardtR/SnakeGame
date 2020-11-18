@@ -1,4 +1,3 @@
-
 export function updateScores(score, highScore) {
   // Scores
   document.getElementById("current-score").innerHTML = score;

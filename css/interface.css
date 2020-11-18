@@ -66,8 +66,8 @@
 #music-slider::-webkit-slider-thumb,
 #effects-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 3vmin;
+  height: 3vmin;
   border-radius: 50%;
   background: rgb(19, 62, 124);
   cursor: pointer;

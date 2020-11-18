@@ -17,18 +17,22 @@ export default class Snake {
       this.changingDirection = true;
       switch (e.code) {
         case "KeyW":
+        case "ArrowUp":
           if (this.direction.y !== 0) break;
           this.direction = { x: 0, y: -1 };
           break;
         case "KeyS":
+        case "ArrowDown":
           if (this.direction.y !== 0) break;
           this.direction = { x: 0, y: 1 };
           break;
         case "KeyA":
+        case "ArrowLeft":
           if (this.direction.x !== 0) break;
           this.direction = { x: -1, y: 0 };
           break;
         case "KeyD":
+        case "ArrowRight":
           if (this.direction.x !== 0) break;
           this.direction = { x: 1, y: 0 };
           break;

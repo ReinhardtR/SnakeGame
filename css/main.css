@@ -32,55 +32,55 @@ body {
 /* Text */
 @keyframes pinkTextGlow {
   from {
-    text-shadow: 0 0 5px rgb(234, 0, 217);
+    text-shadow: 0 0 0.7vmin rgb(234, 0, 217);
   }
   to {
-    text-shadow: 0 0 10px rgb(234, 0, 217);
+    text-shadow: 0 0 1.4vmin rgb(234, 0, 217);
   }
 }
 
 @keyframes cyanTextGlow {
   from {
-    text-shadow: 0 0 5px rgb(14, 220, 231);
+    text-shadow: 0 0 0.7vmin rgb(14, 220, 231);
   }
   to {
-    text-shadow: 0 0 10px rgb(14, 220, 231);
+    text-shadow: 0 0 1.4vmin rgb(14, 220, 231);
   }
 }
 
 @keyframes yellowTextGlow {
   from {
-    text-shadow: 0 0 5px rgb(255, 255, 0);
+    text-shadow: 0 0 0.7vmin rgb(255, 255, 0);
   }
   to {
-    text-shadow: 0 0 10px rgb(255, 255, 0);
+    text-shadow: 0 0 1.4vmin rgb(255, 255, 0);
   }
 }
 
 /* Box */
 @keyframes pinkBoxGlow {
   from {
-    box-shadow: 0 0 4px rgb(234, 0, 217);
+    box-shadow: 0 0 0.8vmin rgb(234, 0, 217);
   }
   to {
-    box-shadow: 0 0 16px rgb(234, 0, 217);
+    box-shadow: 0 0 2vmin rgb(234, 0, 217);
   }
 }
 
 @keyframes cyanBoxGlow {
   from {
-    box-shadow: 0 0 6px rgb(19, 62, 124), 0 0 8px rgb(19, 62, 124);
+    box-shadow: 0 0 0.6vmin rgb(19, 62, 124), 0 0 8px rgb(19, 62, 124);
   }
   to {
-    box-shadow: 0 0 12px rgb(19, 62, 124), 0 0 16px rgb(19, 62, 124);
+    box-shadow: 0 0 1.2vmin rgb(19, 62, 124), 0 0 16px rgb(19, 62, 124);
   }
 }
 
 @keyframes yellowBoxGlow {
   from {
-    box-shadow: 0 0 3px rgb(255, 255, 0), 0 0 6px rgb(255, 255, 0);
+    box-shadow: 0 0 0.2vmin rgb(255, 255, 0), 0 0 6px rgb(255, 255, 0);
   }
   to {
-    box-shadow: 0 0 6px rgb(255, 255, 0), 0 0 12px rgb(255, 255, 0);
+    box-shadow: 0 0 0.5vmin rgb(255, 255, 0), 0 0 12px rgb(255, 255, 0);
   }
 }
