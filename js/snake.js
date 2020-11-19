@@ -9,6 +9,32 @@ export default class Snake {
     this.newSegments = 0;
   }
 
+  // Update snake position
+  update() {
+    this.getInputDirection();
+    this.addSegments();
+    for (let i = this.body.length - 2; i >= 0; i--) {
+      this.body[i + 1] = { ...this.body[i] };
+    }
+
+    this.body[0].x += this.direction.x;
+    this.body[0].y += this.direction.y;
+  }
+
+  // Draw snake on the game board
+  draw(gameBoard) {
+    this.body.forEach((segment, index) => {
+      if (segment.x > 0 && segment.y > 0) {
+        const snakeElement = document.createElement("div");
+        snakeElement.style.gridColumnStart = segment.x;
+        snakeElement.style.gridRowStart = segment.y;
+        snakeElement.classList.add("snake");
+        if (index === 0) snakeElement.classList.add("snake-head");
+        gameBoard.appendChild(snakeElement);
+      }
+    });
+  }
+
   // Handle control inputs
   getInputDirection() {
     window.addEventListener("keydown", (e) => {
@@ -37,30 +63,7 @@ export default class Snake {
           this.direction = { x: 1, y: 0 };
           break;
       }
-    });
-  }
-
-  // Update snake position
-  update() {
-    this.getInputDirection();
-    this.addSegments();
-    for (let i = this.body.length - 2; i >= 0; i--) {
-      this.body[i + 1] = { ...this.body[i] };
-    }
-
-    this.body[0].x += this.direction.x;
-    this.body[0].y += this.direction.y;
-  }
-
-  // Draw snake on the game board
-  draw(gameBoard) {
-    this.body.forEach((segment, index) => {
-      const snakeElement = document.createElement("div");
-      snakeElement.style.gridColumnStart = segment.x;
-      snakeElement.style.gridRowStart = segment.y;
-      snakeElement.classList.add("snake");
-      if (index === 0) snakeElement.classList.add("snake-head");
-      gameBoard.appendChild(snakeElement);
+      e.preventDefault();
     });
   }
 

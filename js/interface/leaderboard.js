@@ -12,12 +12,10 @@ export function createLeaderboard(leaderboardArray) {
     let leaderboardDivider = document.createElement("hr");
     leaderboardDivider.classList.add("leaderboard-divider");
     leaderboard.appendChild(leaderboardDivider);
-
     // Item
     let leaderboardItem = document.createElement("div");
     leaderboardItem.classList.add("leaderboard-item");
     leaderboard.appendChild(leaderboardItem);
-
     // Text
     let positionText = document.createElement("span");
     positionText.classList.add("leaderboard-highscore", "leaderboard-position");
@@ -34,7 +32,7 @@ export function createLeaderboard(leaderboardArray) {
     highScoreText.innerHTML = leaderboardArray[i].highScore;
     leaderboardItem.appendChild(highScoreText);
   }
-  // Bottom yellow line
+  // Bottom line
   let lastLeaderboardDivider = document.createElement("hr");
   lastLeaderboardDivider.classList.add("leaderboard-divider");
   leaderboard.appendChild(lastLeaderboardDivider);
