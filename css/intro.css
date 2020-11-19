@@ -3,7 +3,7 @@
   height: 0;
   width: 100%;
   color: white;
-  background-color: black;
+  background-color: rgb(10,10,10);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,18 +35,21 @@
 }
 
 #first-line {
-  color: blue;
+  color: rgb(255,255,0);
   font-size: 6vmin;
+  text-shadow: 0 0 0.7vmin rgb(255, 255, 0);
 }
 
 #second-line {
-  color: orange;
+  color: rgb(14, 220, 231);
   font-size: 3vmin;
+  text-shadow: 0 0 0.7vmin rgb(14, 220, 231);
 }
 
 #third-line {
-  color: white;
+  color: rgb(234, 0, 217);
   font-size: 2vmin;
+  text-shadow: 0 0 0.7vmin rgb(234, 0, 217);
 }
 
 @keyframes fadeOut {
