@@ -28,7 +28,8 @@
 }
 
 .leaderboard-position {
-  width: 3vmin;
+  width: 2vmin;
+  margin-right: 0.7vmin;
 }
 
 .leaderboard-username {
